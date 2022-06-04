@@ -1,15 +1,15 @@
 // import logo from './logo.svg';
 import './App.css';
-// import About from './components/About';
+import About from './components/About';
 import Navbar from './components/Navbar';
 import TextForm from './components/TextForm';
 import React, {useState} from 'react';
 import Alert from './components/Alert';
-// import {
-//   BrowserRouter as Router,
-//   Routes,
-//   Route,
-// } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+} from "react-router-dom";
 
 function App() {
   const [mode, setMode] = useState('light'); // Weather dark mode is enable or not.
@@ -22,9 +22,19 @@ function App() {
       })
       setTimeout(() => {
         setAlert(null)
-      }, 1500);
+      }, 2000);
   }
-  const toggleMode = ()=>{
+  const removeBodyClasses=()=>{
+  document.body.classList.remove('bg-light')
+  document.body.classList.remove('bg-dark')
+  document.body.classList.remove('bg-warning')
+  document.body.classList.remove('bg-danger')
+  document.body.classList.remove('bg-success')
+}
+
+  const toggleMode = (cls)=>{
+    removeBodyClasses();
+    document.body.classList.add('bg-'+cls)
     if (mode === 'light'){
       setMode('dark');
       document.body.style.backgroundColor='black';
@@ -47,29 +57,18 @@ function App() {
 
   return (
     <>
-    {/* <Router> */}
+    <Router>
     <Navbar title="TextUtils" aboutText="About" mode={mode} toggleMode={toggleMode}/>
     <Alert alert={alert}/>
-    {/* <div className="container my-3">
-    <Routes> */}
-
     <div className="container">
-          {/* <Routes> */}
-            {/* <Route exact path="/About" element={<About />}></Route> */}
-            {/* <Route exact path="/" element={<TextForm heading="Enter text" mode={mode} />  } */}
-            {/* ></Route> */}
-          {/* </Routes> */}
+          <Routes>
+            <Route path="/about"  element={<About mode={mode} />}>
+            </Route>
+            <Route path="/" element={<TextForm heading="Enter text to analyze"  mode={mode} showAlert={showAlert} />}>
+            </Route>
+          </Routes>
         </div>
-        <TextForm showAlert={showAlert} heading="Enter the text to analyze below" mode={mode}/>
-          {/* <Route exact path="/about">
-            <About />
-          </Route>
-          <Route path="/">
-          
-          </Route> */}
-    {/* </Routes>
-    </div> */}
-    {/* </Router> */}
+    </Router>
     </>
   );
 }
