@@ -1,5 +1,4 @@
 {
-  "homepage": "https://shubhamjain2205.github.io/TextUtils-React",
   "name": "my-app",
   "version": "0.1.0",
   "private": true,
@@ -39,7 +38,5 @@
       "last 1 safari version"
     ]
   },
-  "devDependencies": {
-    "gh-pages": "^4.0.0"
-  }
+  "devDependencies": {}
 }
